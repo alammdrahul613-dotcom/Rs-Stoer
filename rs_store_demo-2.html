@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RS Store — Shop Better, Live Better</title>
+<style>
+:root{--navy:#071b3d;--blue:#155eef;--gold:#ffbd22;--bg:#f4f7fc;--ink:#15233d}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--navy);color:white;padding:14px 16px;position:sticky;top:0;z-index:5;box-shadow:0 3px 12px #00112b30}
+.top{max-width:1100px;margin:auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}.brand{font-size:25px;font-weight:800;white-space:nowrap}.brand span{color:var(--gold)}.tag{font-size:11px;color:#d8e4ff;margin-top:3px}
+.search{display:flex;flex:1;min-width:180px}.search input{width:100%;padding:12px;border:0;border-radius:9px 0 0 9px;font-size:14px}.search button{border:0;background:var(--blue);color:white;padding:0 16px;border-radius:0 9px 9px 0;font-size:18px}
+.cart-pill{background:#132e59;padding:10px 12px;border-radius:9px;font-weight:bold;white-space:nowrap}
+main{max-width:1100px;margin:16px auto;padding:0 12px}.hero{background:linear-gradient(115deg,#0753df,#5435db);color:white;border-radius:16px;padding:25px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;overflow:hidden}.hero h1{font-size:clamp(27px,5vw,43px);margin:0 0 10px}.hero p{margin:0 0 16px;color:#e8edff}.hero .emoji{font-size:clamp(55px,12vw,100px)}.cta{display:inline-block;background:var(--gold);color:#17233b;text-decoration:none;font-weight:bold;padding:11px 17px;border-radius:22px}
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:13px 0}.perk{background:white;padding:12px;border-radius:10px;text-align:center;font-size:13px;font-weight:bold}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 2px 12px}.section-head h2{font-size:21px;margin:0}.categories{display:flex;gap:8px;overflow:auto;padding:2px 0 8px}.cat{border:1px solid #d8e1ef;background:white;border-radius:20px;padding:9px 14px;white-space:nowrap;cursor:pointer}.cat.active{background:var(--navy);color:white}
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.product{background:white;border:1px solid #e4eaf4;border-radius:13px;padding:12px;display:flex;flex-direction:column;min-width:0}.pic{height:115px;border-radius:10px;background:linear-gradient(145deg,#edf4ff,#f9fbff);display:grid;place-items:center;font-size:55px}.product h3{font-size:14px;margin:10px 0 6px;line-height:1.35}.muted{color:#72809a;font-size:12px}.price{font-size:17px;font-weight:800;margin:8px 0}.price small{font-size:11px;color:#71809b;text-decoration:line-through;font-weight:normal;margin-left:5px}.add{margin-top:auto;border:0;background:var(--blue);color:white;border-radius:8px;padding:10px;font-weight:bold;cursor:pointer}.add:active{transform:scale(.98)}.empty{background:white;border-radius:12px;padding:25px;text-align:center;grid-column:1/-1}.notice{font-size:12px;color:#60708b;text-align:center;margin:18px 0}footer{background:var(--navy);color:#d8e4ff;text-align:center;padding:22px 12px;font-size:12px;margin-top:24px}
+@media(max-width:700px){.products{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:22px 16px}.perks{grid-template-columns:1fr}.perk{padding:10px}.top{gap:10px}.brand{font-size:23px}.cart-pill{margin-left:auto}}
+@media(min-width:701px) and (max-width:900px){.products{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header><div class="top">
+  <div><div class="brand">🛒 <span>RS</span> Store</div><div class="tag">Shop Better • Live Better</div></div>
+  <div class="search"><input id="search" placeholder="सामान खोजें..." aria-label="सामान खोजें"><button id="searchBtn" aria-label="Search">⌕</button></div>
+  <div class="cart-pill">🛒 Cart: <span id="cartCount">0</span></div>
+</div></header>
+<main>
+  <section class="hero"><div><h1>हर ज़रूरत का<br>एक ही घर</h1><p>अच्छे प्रोडक्ट • बढ़िया कीमत • आसान शॉपिंग</p><a class="cta" href="#products">अभी खरीदें →</a></div><div class="emoji" aria-hidden="true">📱 👟 🎧</div></section>
+  <div class="perks"><div class="perk">🚚 आसान डिलीवरी</div><div class="perk">💵 Cash on Delivery (डेमो)</div><div class="perk">🤝 मदद के लिए संपर्क करें</div></div>
+  <div class="section-head"><h2>कैटेगरी</h2></div>
+  <div class="categories" id="categories">
+    <button class="cat active" data-cat="सभी">सभी</button><button class="cat" data-cat="मोबाइल">📱 मोबाइल</button><button class="cat" data-cat="फैशन">👕 फैशन</button><button class="cat" data-cat="जूते">👟 जूते</button><button class="cat" data-cat="इलेक्ट्रॉनिक्स">🎧 इलेक्ट्रॉनिक्स</button><button class="cat" data-cat="घर">🏠 घर</button>
+  </div>
+  <div class="section-head" id="products"><h2>लोकप्रिय प्रोडक्ट</h2><span class="muted">डेमो कैटलॉग</span></div>
+  <section class="products" id="productGrid"></section>
+  <p class="notice">यह RS Store का शुरुआती डेमो है। अभी वास्तविक पेमेंट, ऑर्डर सेविंग या डिलीवरी कनेक्ट नहीं है।</p>
+</main>
+<footer><strong>🛒 RS Store</strong><p>Shop Better • Live Better</p><p>© 2026 RS Store · आपकी अपनी शॉपिंग वेबसाइट</p></footer>
+<script>
+const products=[
+ {id:1,name:"स्मार्टफोन",cat:"मोबाइल",emoji:"📱",price:8999,old:10999},
+ {id:2,name:"कैज़ुअल शर्ट",cat:"फैशन",emoji:"👔",price:499,old:799},
+ {id:3,name:"रनिंग शूज़",cat:"जूते",emoji:"👟",price:1299,old:1799},
+ {id:4,name:"वायरलेस ईयरबड्स",cat:"इलेक्ट्रॉनिक्स",emoji:"🎧",price:899,old:1299},
+ {id:5,name:"स्मार्ट वॉच",cat:"इलेक्ट्रॉनिक्स",emoji:"⌚",price:1499,old:2199},
+ {id:6,name:"बैकपैक",cat:"फैशन",emoji:"🎒",price:699,old:999},
+ {id:7,name:"टेबल लैंप",cat:"घर",emoji:"💡",price:399,old:599},
+ {id:8,name:"कुकवेयर सेट",cat:"घर",emoji:"🍳",price:1199,old:1599}
+];
+let cart=0,activeCat="सभी";
+const grid=document.getElementById("productGrid");
+function render(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ const shown=products.filter(p=>(activeCat==="सभी"||p.cat===activeCat)&&(p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)));
+ grid.innerHTML=shown.length?shown.map(p=>`<article class="product"><div class="pic">${p.emoji}</div><h3>${p.name}</h3><div class="muted">${p.cat}</div><div class="price">₹${p.price.toLocaleString("en-IN")} <small>₹${p.old.toLocaleString("en-IN")}</small></div><button class="add" onclick="addToCart()">कार्ट में डालें</button></article>`).join(""):'<div class="empty">कोई प्रोडक्ट नहीं मिला। दूसरा नाम खोजें।</div>';
+}
+function addToCart(){cart++;document.getElementById("cartCount").textContent=cart;alert("प्रोडक्ट डेमो कार्ट में जोड़ दिया गया!");}
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("searchBtn").addEventListener("click",render);
+document.querySelectorAll(".cat").forEach(b=>b.addEventListener("click",()=>{activeCat=b.dataset.cat;document.querySelectorAll(".cat").forEach(x=>x.classList.toggle("active",x===b));render()}));
+render();
+</script>
+</body>
+</html>
